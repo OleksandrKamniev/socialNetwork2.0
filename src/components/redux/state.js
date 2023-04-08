@@ -39,25 +39,31 @@ let store={
             ]
         }
     },
-    addPost(){
-        let newPost={message: this._state.profilePage.newPostText, likesAmount: "0", id: "6"}
-        this._state.profilePage.postsData.push(newPost)
-        this._state.profilePage.newPostText="";
-        this._callSubscriber(this._state)
-    },
     getState(){
         return this._state;
-    },
-    updateNewPostText(newText){
-        this._state.profilePage.newPostText=newText;
-        this._callSubscriber(this._state)
     },
     _callSubscriber(){
         alert("State changed")
     },
+
     subscribe(observer){
         this._callSubscriber=observer;
     },
+    dispatch(action){
+        switch (action.type){
+            case "ADD-POST":
+                let newPost={message: this._state.profilePage.newPostText, likesAmount: "0", id: "6"}
+                this._state.profilePage.postsData.push(newPost)
+                this._state.profilePage.newPostText="";
+                this._callSubscriber(this._state);
+                break;
+            case "UPDATE-NEW-POST-TEXT":
+                this._state.profilePage.newPostText=action.newText;
+                this._callSubscriber(this._state)
+                break;
+
+        }
+    }
 }
 window.store=store;
 
