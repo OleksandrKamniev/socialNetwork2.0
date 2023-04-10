@@ -1,3 +1,7 @@
+const ADD_POST = "ADD_POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+const ADD_MESSAGE = "ADD_MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
 let store={
     _state: {
         profilePage: {
@@ -27,7 +31,8 @@ let store={
                 {message: "Hold on", id: "4"},
                 {message: "Hi", id: "5"},
                 {message: "Hello", id: "6"},
-            ]
+            ],
+            newMessageText: "New message",
         },
         usersPage:{
             usersData:[
@@ -50,21 +55,41 @@ let store={
         this._callSubscriber=observer;
     },
     dispatch(action){
+
+
         switch (action.type){
-            case "ADD-POST":
+            case ADD_POST:
                 let newPost={message: this._state.profilePage.newPostText, likesAmount: "0", id: "6"}
                 this._state.profilePage.postsData.push(newPost)
                 this._state.profilePage.newPostText="";
                 this._callSubscriber(this._state);
                 break;
-            case "UPDATE-NEW-POST-TEXT":
-                this._state.profilePage.newPostText=action.newText;
+            case UPDATE_NEW_POST_TEXT:
+                this._state.profilePage.newPostText=action.newPostText;
+                this._callSubscriber(this._state)
+                break;
+            case ADD_MESSAGE:
+                let newMessage={message: this._state.dialogsPage.newMessageText, id: "8"}
+                this._state.dialogsPage.messagesContentData.push(newMessage)
+                this._state.dialogsPage.newMessageText="";
+                this._callSubscriber(this._state);
+                break;
+            case UPDATE_NEW_MESSAGE_TEXT:
+                this._state.dialogsPage.newMessageText=action.newMessageText;
                 this._callSubscriber(this._state)
                 break;
 
         }
     }
 }
+export const addPostAC=()=>({type: ADD_POST
+})
+export const postChangeAC=(text)=>({type: UPDATE_NEW_POST_TEXT, newPostText: text
+});
+export const addMessageAC=()=>({type: ADD_MESSAGE
+})
+export const messageChangeAC=(text)=>({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text
+});
 window.store=store;
 
 

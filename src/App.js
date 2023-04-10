@@ -26,7 +26,7 @@ const App = (props) => {
               path="/dialogs/*"
               element={
                 <Dialogs
-                    dialogsPage={props.state.dialogsPage}
+                    dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}
                 />
               }
             ></Route>
