@@ -6,13 +6,14 @@ import DialogItem from "./DialogItem/DialogItem";
 
 let Dialogs = (props) => {
   let messagesAuthors = props.dialogsPage.authorsMessagesData.map((dialoger) => {
-    return <DialogItem name={dialoger.name} avatarImageLink={dialoger.avatarImageLink} id={dialoger.id} />;
+    return <DialogItem name={dialoger.name} avatarImageLink={dialoger.avatarImageLink} id={dialoger.id} key={dialoger.id} />;
   });
   let messagesContent = props.dialogsPage.messagesContentData.map((message) => {
-    return <Message message={message.message} id={message.id} />;
+    return <Message message={message.message} id={message.id} key={message.id} />;
   });
   let addMessage=()=>{
     props.addMessage();
+
   }
   let onMessageChange=(e)=>{
     let text=e.target.value;
@@ -26,7 +27,7 @@ let Dialogs = (props) => {
     </div>
 
         <div className={styles.addPost}>
-          <textarea onChange={onMessageChange} value={props.newMessageText} placeholder='Enter your message'/>
+          <textarea onChange={onMessageChange} value={props.dialogsPage.newMessageText} placeholder='Enter your message'/>
           <button onClick={addMessage}>Add message</button>
         </div>
       </div>

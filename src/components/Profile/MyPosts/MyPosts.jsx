@@ -4,9 +4,11 @@ import Post from "./Post/Post";
 
 
 const MyPosts = (props) => {
+  debugger;
   let posts = props.posts.map((post) => {
     return (
       <Post
+          key={post.id}
         message={post.message}
         likesAmount={post.likesAmount}
         id={post.id}
