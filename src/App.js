@@ -8,10 +8,10 @@ import {  Routes, Route } from "react-router-dom";
 import Friends from "./components/Friends/Friends";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
-import Users from "./components/Users/Users";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
-const App = (props) => {
+const App = () => {
   return (
       <div className="app-wrapper">
         <Header />
@@ -34,7 +34,7 @@ const App = (props) => {
             <Route path="/news" element={<News />}></Route>
             <Route path="/music" element={<Music />}></Route>
               <Route path="/users" element={
-                  <Users />} ></Route>
+                  <UsersContainer />} ></Route>
 
           </Routes>
         </div>
