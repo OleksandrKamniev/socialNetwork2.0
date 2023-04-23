@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./Users.module.css"
 import userPhoto from "../../asserts/userImage.jpg"
 let Users =(props)=>{
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -11,7 +11,7 @@ let Users =(props)=>{
             <div>
                 {pages.map(p=>{
                     return <span className={props.currentPage===p && styles.selectedPage}
-                    onClick={(e)=>{props.onPageChanged(p)}}>{p}</span>
+                    onClick={()=>{props.onPageChanged(p)}}>{p}</span>
                 })}
             </div>
             {

@@ -38,7 +38,7 @@ let mapStateToProps=(state)=>{
     return{
         users:state.usersPage.users,
         pageSize: state.usersPage.pageSize,
-        totalUserCount: state.usersPage.totalUserCount,
+        totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
 
 
