@@ -1,16 +1,22 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
-const ProfileInfo = () => {
+import Preloader from "../../common/Preloader/Preloader";
+const ProfileInfo = (props) => {
+    if(!props.profile){
+        return <Preloader />
+    }
   return (
     <div className={styles.infoBlock}>
-      Main content
       <div>
         <img
           src="https://www.timeoutdubai.com/cloud/timeoutdubai/2021/09/11/hfpqyV7B-IMG-Dubai-UAE.jpg"
           alt="randomPhoto"
         ></img>
       </div>
-      <div>ava+description</div>
+      <div>
+          <img src={props.profile.photos.large} alt="ava" />
+          ava+description
+      </div>
     </div>
   );
 };
