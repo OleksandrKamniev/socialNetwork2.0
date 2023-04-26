@@ -19,7 +19,7 @@ const App = () => {
         <div className="app-wrapper-content">
           <Routes>
             <Route
-              path="/profile"
+              path="/profile/*"
               element={<ProfileContainer  />}
             ></Route>
             <Route
