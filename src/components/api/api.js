@@ -13,16 +13,18 @@ export const userAPI={
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response=>response.data);
     },
-    follow(userId){
+    acceptFollow(userId){
         return instance.post(`follow/${userId}`, {})
             .then(response=>response.data);
     },
-    unfollow(userId){
+    acceptUnfollow(userId){
         return instance.delete(`follow/${userId}`)
             .then(response=>response.data);
     },
     auth() {
-        return instance.get(`/auth/me`)
+        return axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+            withCredentials: true
+        })
             .then(response => response.data);
     }
 }
