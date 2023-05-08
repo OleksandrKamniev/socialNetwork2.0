@@ -9,7 +9,7 @@ const Profile = (props) => {
     if (!props.isAuth) return <Navigate to={"/login"}/>
   return (
     <div className={styles.content}>
-      <ProfileInfo profile={props.props}/>
+      <ProfileInfo profile={props.props}  status={props.status} updateStatus={props.updateStatus}/>
       <MyPostsContainer/>
     </div>
   );

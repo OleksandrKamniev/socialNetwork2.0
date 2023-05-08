@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ProfileInfo.module.css";
 
 import ProfileStatus from "./ProfileStatus";
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
     // debugger
     // if(!props.profile){
     //     return <Preloader />
@@ -17,7 +17,7 @@ const ProfileInfo = () => {
       </div>
       <div>
           {/*<img src={props.profile.photos.large} alt="ava" />*/}
-          <ProfileStatus status={"Yo!"}/>
+          <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
       </div>
     </div>
   );
