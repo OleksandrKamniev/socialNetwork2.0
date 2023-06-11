@@ -13,16 +13,16 @@ export const usersAPI={
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response=>response.data);
     },
-    acceptFollow(userId){
+    acceptFollow(userId:number){
         return instance.post(`follow/${userId}`, {})
             .then(response=>response.data);
     },
-    acceptUnfollow(userId){
+    acceptUnfollow(userId:number){
         return instance.delete(`follow/${userId}`)
             .then(response=>response.data);
     },
 
-    getProfile(userId){
+    getProfile(userId:number){
         console.warn("Absolute method. Please profileAPI object")
         return profileAPI.getProfile(userId);
 
@@ -30,14 +30,14 @@ export const usersAPI={
 }
 export const profileAPI={
 
-    getProfile(userId){
+    getProfile(userId:number){
         return instance.get(`profile/${userId}`)
 
     },
-    getStatus(userId){
+    getStatus(userId:number){
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status){
+    updateStatus(status:string){
         return instance.put(`profile/status`, {status: status})
     }
 }
