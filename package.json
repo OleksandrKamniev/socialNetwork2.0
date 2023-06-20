@@ -32,7 +32,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "airbnb"
     ]
   },
   "browserslist": {
@@ -51,5 +52,12 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(react-leaflet|@react-leaflet|d3-*|axios))"
     ]
+  },
+  "main": "index.js",
+  "repository": "https://github.com/OleksandrKamniev/socialNetwork2.0.git",
+  "author": "Oleksandr Kamniev <sashkam75@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.42.0"
   }
 }

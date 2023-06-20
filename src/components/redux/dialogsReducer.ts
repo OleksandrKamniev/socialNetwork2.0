@@ -1,8 +1,20 @@
-
 const SEND_MESSAGE = "SEND_MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
-
-let intialState={
+type AuthorMessageDataType= {
+    name: string|null
+    avatarImageLink: string|null;
+    id: string|null;
+}
+type MessagesContentDataType= {
+    message: string|null;
+    id: string|null;
+}
+type InitialStateType={
+    authorsMessagesData:AuthorMessageDataType[];
+    messagesContentData: MessagesContentDataType[];
+    newMessageText:string;
+}
+let intialState:InitialStateType={
     authorsMessagesData: [
         {name: "Sveta", avatarImageLink: "https://static.vecteezy.com/system/resources/previews/006/487/917/original/man-avatar-icon-free-vector.jpg", id: "1"},
         {name: "Vera", avatarImageLink: "https://static.vecteezy.com/system/resources/previews/006/487/917/original/man-avatar-icon-free-vector.jpg", id: "2"},
@@ -21,8 +33,8 @@ let intialState={
     ],
     newMessageText: "",
 }
-
-const dialogsReducer=(state=intialState, action)=>{
+type DialogActionType={type: typeof SEND_MESSAGE} | {type: typeof UPDATE_NEW_MESSAGE_TEXT; newMessageText:string};
+const dialogsReducer=(state:InitialStateType=intialState, action:DialogActionType)=>{
     let stateCopy;
     switch (action.type){
         case SEND_MESSAGE: {
@@ -45,9 +57,9 @@ const dialogsReducer=(state=intialState, action)=>{
 
     }
 }
-export const sendMessageAC=()=>({type: SEND_MESSAGE
+export const sendMessageAC=():DialogActionType=>({type: SEND_MESSAGE
 })
 
-export const messageChangeAC=(text)=>({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text
+export const messageChangeAC=(text:string):DialogActionType=>({type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text
 });
 export default dialogsReducer;

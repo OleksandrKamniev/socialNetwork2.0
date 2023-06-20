@@ -1,6 +1,5 @@
 import { profileAPI, usersAPI }  from "../api/api"
 
-
 interface Post{
     message:string
     likesAmount: string
