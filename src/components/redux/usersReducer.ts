@@ -7,17 +7,22 @@ const SET_CURRENT_PAGE="SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT="SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING= "TOGGLE_IS_FETCHING";
 const TOGGLE_IS_FOLLOWING_PROGRESS="TOGGLE_IS_FOLLOWING_PROGRESS";
+type UserType={
+    id:number
+    followed:boolean
+}
 let initialState={
     users:[
-    ],
-    pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 1,
+    ]as Array<UserType>,
+    pageSize: 5 as number,
+    totalUsersCount: 0 as number,
+    currentPage: 1 as number,
     isFetching: true,
-    followingInProgress: [2, 3],
+    followingInProgress: [2, 3] as number[],
 
 }
-const usersReducer=(state=initialState, action)=>{
+type InitialStateType=typeof initialState
+const usersReducer=(state:InitialStateType=initialState, action:any)=>{
     switch (action.type) {
         case FOLLOW: {
            return {
@@ -65,20 +70,49 @@ const usersReducer=(state=initialState, action)=>{
             return state;
     }
 }
+type FollowSuccessType={
+    type: typeof FOLLOW,
+    userId: number
+}
+type UnfollowSuccessType={
+    type: typeof UNFOLLOW,
+    userId: number
+}
+type SetUsersType={
+    type: typeof SET_USERS,
+    users: UserType[]
+}
+type SetCurrentPageType={
+    type: typeof SET_CURRENT_PAGE,
+    currentPage: number
+}
+type SetTotalUsersCountType={
+    type: typeof SET_TOTAL_USERS_COUNT,
+    count: number
+}
+type ToggleIsFetchingType={
+    type: typeof TOGGLE_IS_FETCHING,
+    isFetching: boolean
+}
+type ToggleFollowingProgressType={
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS,
+    isFetching: boolean,
+    userId:number
+}
 
-export const followSucces=(userId)=>({type: FOLLOW, userId
+export const followSuccess=(userId:number):FollowSuccessType=>({type: FOLLOW, userId
 })
-export const unfollowSucces=(userId)=>({type: UNFOLLOW, userId
+export const unfollowSuccess=(userId:number):UnfollowSuccessType=>({type: UNFOLLOW, userId
 });
-export const setUsers=(users)=>({type: SET_USERS, users
+export const setUsers=(users:UserType[]):SetUsersType=>({type: SET_USERS, users
 });
-export const setCurrentPage=(currentPage)=>({type: SET_CURRENT_PAGE, currentPage: currentPage});
-export const setTotalUsersCount=(totalUsersCount)=>({type:SET_TOTAL_USERS_COUNT, count: totalUsersCount});
+export const setCurrentPage=(currentPage:number):SetCurrentPageType=>({type: SET_CURRENT_PAGE, currentPage: currentPage});
+export const setTotalUsersCount=(totalUsersCount:number):SetTotalUsersCountType=>({type:SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 
-export const toggleIsFetching=(isFetching)=>({type:TOGGLE_IS_FETCHING, isFetching})
-export const toggleFollowingProgress=(isFetching, userId)=>({type:TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
+export const toggleIsFetching=(isFetching:boolean):ToggleIsFetchingType=>({type:TOGGLE_IS_FETCHING, isFetching})
+export const toggleFollowingProgress=(isFetching:boolean, userId:number):ToggleFollowingProgressType=>({type:TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId})
 
-export const requestUsers =(page, pageSize)=>(dispatch)=>{
+export const requestUsers =(page:number, pageSize:number)=>(dispatch:any)=>{
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(page));
 
@@ -90,22 +124,22 @@ export const requestUsers =(page, pageSize)=>(dispatch)=>{
             dispatch(setTotalUsersCount(data.totalCount));
         });
 }
-export const unfollow=(userId)=>(dispatch)=>{
+export const unfollow=(userId:number)=>(dispatch:any)=>{
     dispatch(toggleFollowingProgress(true, userId));
     usersAPI.acceptUnfollow(userId)
         .then(data => {
             if (data.resultCode === 0) {
-                dispatch(unfollowSucces(userId))
+                dispatch(unfollowSuccess(userId))
             }
             dispatch(toggleFollowingProgress(false, userId));
         })
 }
-export const follow=(userId)=>(dispatch)=>{
+export const follow=(userId:number)=>(dispatch:any)=>{
     dispatch(toggleFollowingProgress(true, userId));
     usersAPI.acceptFollow(userId)
         .then(data => {
             if (data.resultCode === 0) {
-                dispatch(followSucces(userId))
+                dispatch(followSuccess(userId))
             }
             dispatch(toggleFollowingProgress(false, userId));
         })
