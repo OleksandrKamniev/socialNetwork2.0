@@ -1,23 +1,43 @@
-import React from 'react';
-import styles from "./Users.module.css"
-import userPhoto from "../../asserts/userImage.jpg"
-import { NavLink} from "react-router-dom";
-let Users =(props)=>{
+import React, { FC } from 'react';
+import styles from './Users.module.css';
+import userPhoto from '../../asserts/userImage.jpg';
+import { NavLink } from 'react-router-dom';
+interface User {
+    id:number
+    followed:boolean
+    photos: {
+        small: string | null;
+    };
+    name: string
+    status: string
+}
+interface UsersPropsType {
+    totalUsersCount:number
+    pageSize:number
+    currentPage:number
+    users: Array<User>
+    followingInProgress: number[]
+    onPageChanged: (userId:number)=>void
+    followTC: (userId:number)=>void
+    unfollowTC: (page:number)=>void
+
+}
+let Users: FC<UsersPropsType> =(props)=>{
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-        return <div>
-            <div>
-                {pages.map(p=>{
-                    return <span className={props.currentPage===p && styles.selectedPage}
-                    onClick={()=>{props.onPageChanged(p)}}>{p}</span>
-                })}
-            </div>
-            {
-                props.users.map(u => <div key={u.id}>
+    return <div>
+        <div>
+            {pages.map(p=>{
+                return <span className={props.currentPage===p && styles.selectedPage}
+                             onClick={()=>{props.onPageChanged(p)}}>{p}</span>
+            })}
+        </div>
+        {
+            props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <NavLink to={ `/profile/${ u.id }` }>
@@ -34,17 +54,16 @@ let Users =(props)=>{
                             }}>Follow</button>}
                     </div>
                 </span>
-                    <span>
+                <span>
                     <span>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
 
                 </span>
-                </div>)
-            }
-        </div>
+            </div>)
+        }
+    </div>
 }
-
 
 export default Users;
