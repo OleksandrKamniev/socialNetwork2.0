@@ -7,7 +7,10 @@ const SET_CURRENT_PAGE="SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT="SET_TOTAL_USERS_COUNT";
 const TOGGLE_IS_FETCHING= "TOGGLE_IS_FETCHING";
 const TOGGLE_IS_FOLLOWING_PROGRESS="TOGGLE_IS_FOLLOWING_PROGRESS";
-type UserType={
+export type UserType={
+    photos: any
+    name:string
+    status:string
     id:number
     followed:boolean
 }
