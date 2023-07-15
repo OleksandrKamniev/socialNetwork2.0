@@ -14,9 +14,15 @@ let rootReducer=combineReducers({
 
 type RootReducerType=typeof rootReducer
 export type AppStateType=ReturnType<RootReducerType>
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
-   applyMiddleware(thunkMiddleware)
+    applyMiddleware(thunkMiddleware)
 ));
 
-export default store;
+export default store
